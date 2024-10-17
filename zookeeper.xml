@@ -1,0 +1,12 @@
+<yandex>
+    <zookeeper>
+        <node>
+            <host>zookeeper</host>
+            <port>2182</port>
+        </node>
+        <identity>user:password</identity>
+    </zookeeper>
+    <distributed_ddl>
+        <path>/clickhouse/clickhouse/task_queue/ddl</path>
+    </distributed_ddl>
+</yandex>

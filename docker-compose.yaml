@@ -1,0 +1,47 @@
+version: "3.2"
+services:
+  chi-clickhouse-clickhouse-0-0:
+    image: clickhouse/clickhouse-server
+    volumes:
+      - ./config.xml:/etc/clickhouse-server/config.d/local.xml
+      - ./macros1.xml:/etc/clickhouse-server/config.d/macros.xml
+      - ./data/1:/var/lib/clickhouse
+    ports:
+      - 1003:9000
+      - 8123:8123
+    environment:
+      CLICKHOUSE_USER: user
+      CLICKHOUSE_PASSWORD: password
+      CLICKHOUSE_DB: litedmpm
+      CLICKHOUSE_ALWAYS_RUN_INITDB_SCRIPTS: true
+    networks:
+      - new_cluster_click
+      - zookiper_cluster
+  chi-clickhouse-clickhouse-0-1:
+    image: clickhouse/clickhouse-server
+    volumes:
+      - ./config.xml:/etc/clickhouse-server/config.d/local.xml
+      - ./macros2.xml:/etc/clickhouse-server/config.d/macros.xml
+      - ./data/2:/var/lib/clickhouse
+    environment:
+      CLICKHOUSE_USER: user
+      CLICKHOUSE_PASSWORD: password
+      CLICKHOUSE_DB: litedmpm
+      CLICKHOUSE_ALWAYS_RUN_INITDB_SCRIPTS: true
+    networks:
+      - new_cluster_click
+      - zookiper_cluster
+  zookeeper:
+    image: docker.io/bitnami/zookeeper:3.8
+    ports:
+      - 2182:2181
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+      - ./data/zookeeper/:/bitnami
+    networks:
+     - zookiper_cluster
+
+networks:
+  zookiper_cluster:
+  new_cluster_click:
+    external: true

@@ -1,0 +1,9 @@
+<yandex>
+    <macros>
+        <installation>clickhouse</installation>
+        <all-sharded-shard>1</all-sharded-shard>
+        <cluster>clickhouse</cluster>
+        <shard>0</shard>
+        <replica>chi-clickhouse-clickhouse-0-1</replica>
+    </macros>
+</yandex>
