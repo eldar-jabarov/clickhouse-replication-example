@@ -1,0 +1,11 @@
+<yandex>
+    <zookeeper>
+        <node>
+            <host>zookeeper-sh</host>
+            <port>2181</port>
+        </node>
+    </zookeeper>
+    <distributed_ddl>
+        <path>/clickhouse/clickhouse-sh/task_queue/ddl</path>
+    </distributed_ddl>
+</yandex>

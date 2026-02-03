@@ -1,0 +1,19 @@
+<yandex>
+    <users>
+        <user>
+            <networks>
+                <ip>::/0</ip>
+            </networks>
+            <password>password</password>
+            <profile>default</profile>
+            <quota>default</quota>
+        </user>
+        <default>
+            <networks>
+                <ip>::/0</ip>
+            </networks>
+            <profile>default</profile>
+            <quota>default</quota>
+        </default>
+    </users>
+</yandex>

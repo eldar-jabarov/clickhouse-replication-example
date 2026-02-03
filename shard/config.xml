@@ -1,0 +1,27 @@
+<yandex>
+    <remote_servers>
+        <clickhouse-sh>
+            <shard>
+                <replica>
+                    <host>clickhouse-shard-1</host>
+                    <port>9000</port>
+                    <secure>0</secure>
+                </replica>
+            </shard>
+            <shard>
+                <replica>
+                    <host>clickhouse-shard-2</host>
+                    <port>9000</port>
+                    <secure>0</secure>
+                </replica>
+            </shard>
+            <shard>
+                <replica>
+                    <host>clickhouse-shard-3</host>
+                    <port>9000</port>
+                    <secure>0</secure>
+                </replica>
+            </shard>
+        </clickhouse-sh>
+    </remote_servers>
+</yandex>

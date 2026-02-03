@@ -1,0 +1,66 @@
+version: "3.9"
+
+name: new
+
+services:
+  clickhouse-shard-1:
+    image: clickhouse/clickhouse-server:25.9.4.58
+    volumes:
+      - ./config.xml:/etc/clickhouse-server/config.d/remote_servers.xml:ro
+      - ./zookeeper.xml:/etc/clickhouse-server/config.d/zookeeper.xml:ro
+      - ./users.xml:/etc/clickhouse-server/users.d/user.xml:ro
+      - ./macros1.xml:/etc/clickhouse-server/config.d/macros.xml:ro
+      - clickhouse_store_shard1:/var/lib/clickhouse
+    ports:
+      - "41601:9000"
+      - "41611:8123"
+    networks:
+      - ch_sharded_net
+    depends_on:
+      - zookeeper-sh
+  clickhouse-shard-2:
+    image: clickhouse/clickhouse-server:25.9.4.58
+    volumes:
+      - ./config.xml:/etc/clickhouse-server/config.d/remote_servers.xml:ro
+      - ./zookeeper.xml:/etc/clickhouse-server/config.d/zookeeper.xml:ro
+      - ./users.xml:/etc/clickhouse-server/users.d/user.xml:ro
+      - ./macros2.xml:/etc/clickhouse-server/config.d/macros.xml:ro
+      - clickhouse_store_shard2:/var/lib/clickhouse
+    ports:
+      - "41602:9000"
+      - "41612:8123"
+    networks:
+      - ch_sharded_net
+    depends_on:
+      - zookeeper-sh
+  clickhouse-shard-3:
+    image: clickhouse/clickhouse-server:25.9.4.58
+    volumes:
+      - ./config.xml:/etc/clickhouse-server/config.d/remote_servers.xml:ro
+      - ./zookeeper.xml:/etc/clickhouse-server/config.d/zookeeper.xml:ro
+      - ./users.xml:/etc/clickhouse-server/users.d/user.xml:ro
+      - ./macros3.xml:/etc/clickhouse-server/config.d/macros.xml:ro
+      - clickhouse_store_shard3:/var/lib/clickhouse
+    ports:
+      - "41603:9000"
+      - "41613:8123"
+    networks:
+      - ch_sharded_net
+    depends_on:
+      - zookeeper-sh
+
+  zookeeper-sh:
+    image:  zookeeper:3.9
+    ports:
+      - "41600:2181"
+    networks:
+     - ch_sharded_net
+
+volumes:
+  clickhouse_store_shard1:
+  clickhouse_store_shard2:
+  clickhouse_store_shard3:
+
+networks:
+  ch_sharded_net:
+    driver: bridge
